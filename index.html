@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote of the Day</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quoteBox">
+        <h2>Quote of the Day</h2>
+        <blockquote id="quote">Loading...</blockquote>
+        <span id="author">Loading...</span>
+        <div>
+            <button onclick="getQuote(apiURL);">New Quote</button>
+            <button onclick="tweet()"><img src="https://th.bing.com/th/id/R.b757f2bca8039d4a08882d38f4c1b8f0?rik=ghH7DAGg25Eeew&riu=http%3a%2f%2fpluspng.com%2fimg-png%2ftwitter-png-logo-logo-twitter-in-png-2500.png&ehk=8T3AUm4YM1VPbzANgHJr0FTLLw4och8GO%2bj%2fFN9SSrA%3d&risl=&pid=ImgRaw&r=0" height="40px" width="40px"> Tweet</button>
+        </div>
+    </div>
+    <script>
+        const quote = document.getElementById("quote");
+        const author = document.getElementById("author");
+        const apiURL = "https://api.quotable.io/random";
+
+        async function getQuote(url){
+            const response = await fetch(url);
+            var data = await response.json();
+            quote.innerHTML = data.content;
+            author.innerHTML = data.author;
+        }
+        getQuote(apiURL);
+
+        function tweet(){
+            window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML +"---- By " + author.innerHTML, "Tweet Window", "width=600, height=300")
+        }
+
+    </script>
+</body>
+</html>
